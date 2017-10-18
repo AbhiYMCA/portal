@@ -17,5 +17,6 @@ class CreateThreadTest extends JobTestCase
         $thread = $this->dispatch(new CreateThread('Subject', 'Body', '', $user));
 
         $this->assertEquals('Subject', $thread->subject());
+        $this->assertTrue($user->isSubscribedTo($thread));
     }
 }
