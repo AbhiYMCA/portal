@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Subscription extends Model
 {
@@ -18,4 +20,14 @@ class Subscription extends Model
         'subscriptionable_id',
         'subscriptionable_type',
     ];
+
+    public function user(): User
+    {
+        return $this->userRelation;
+    }
+
+    public function userRelation(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

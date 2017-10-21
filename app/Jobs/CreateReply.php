@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\ReplyWasCreated;
 use App\User;
 use App\Models\Reply;
 use App\Models\ReplyAble;
@@ -48,6 +49,8 @@ class CreateReply
         $reply->authoredBy($this->author);
         $reply->to($this->replyAble);
         $reply->save();
+
+        event(new ReplyWasCreated($reply));
 
         return $reply;
     }
